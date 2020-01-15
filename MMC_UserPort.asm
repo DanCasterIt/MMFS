@@ -18,9 +18,9 @@ IF _TURBOMMC
    msbits  = &08 \\ 0000 1000
    msmask  = &E9 \\ 1110 1001
 ELSE
-   ddrmask = &03 \\ 0000 0011
+   ddrmask = &C0 \\ 1100 0000
    msbits  = &00 \\ 0000 0000
-   msmask  = &FD \\ 1111 1101
+   msmask  = &7F \\ 0111 1111
 ENDIF
 
     \\ Read byte (User Port)
@@ -68,7 +68,7 @@ ELSE
         ROL A
         AND #msmask
         STA iorb%
-        ORA #2
+        ORA #80
         STA iorb%
     NEXT
 ENDIF
