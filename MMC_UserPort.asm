@@ -28,7 +28,7 @@ ENDIF
 .MMC_GetByte
 .UP_ReadByteX
 {
-    LDA #(3 + msbits)   \\ Ensure CLK and MOSI both high
+    LDA #(60 + msbits)   \\ Ensure CLK and MOSI both high \\ 0110 0000
     STA iorb%
     JSR ShiftRegMode2
     LDA #4
@@ -414,14 +414,14 @@ ENDIF
     LDA acr%   \\ Set SR Mode to mode 0
     AND #&E3   \\ 11100011 = SR Mode 0
     STA acr%   \\ CB1 is now an input
-    LDA ddrb%  \\ Set PB1 to being an output
-    ORA #&02   \\ 00000010
+    LDA ddrb%  \\ Set PB6 to being an output
+    ORA #&40   \\ 01000000
     STA ddrb%
     RTS
 
 .ShiftRegMode2
-    LDA ddrb%  \\ Set PB1 to being an input
-    AND #&FD   \\ 11111101
+    LDA ddrb%  \\ Set PB6 to being an input
+    AND #&FD   \\ 10111111
     STA ddrb%
     LDA acr%
     AND #&E3   \\ 11100011
